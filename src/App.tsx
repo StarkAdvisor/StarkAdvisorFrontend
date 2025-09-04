@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CryptoChart from "./components/CryptoChart";
+import NewsSection from "./components/NewsSection";
 import "./App.css";
 
 type TabType = "Acciones" | "ETFs" | "Forex";
@@ -9,13 +10,6 @@ type MarketEntry = {
   value: number;
   change: number;
   currency: string;
-};
-
-type NewsItem = {
-  title: string;
-  description: string;
-  url: string;
-  image?: string;
 };
 
 const marketData: Record<TabType, MarketEntry[]> = {
@@ -46,31 +40,6 @@ function App() {
     { time: "10:15", price: 103 },
     { time: "10:20", price: 105 },
   ];
-
-  // ✅ Noticias de prueba (mock data)
-  const [news] = useState<NewsItem[]>([
-    {
-      title: "Apple anuncia nuevos resultados financieros",
-      description:
-        "Apple superó las expectativas del mercado en su último trimestre.",
-      url: "#",
-      image: "https://via.placeholder.com/300x180",
-    },
-    {
-      title: "La FED prepara nueva subida de tasas",
-      description:
-        "Los mercados reaccionan a la expectativa de una nueva decisión de la FED.",
-      url: "#",
-      image: "https://via.placeholder.com/300x180",
-    },
-    {
-      title: "Bitcoin se mantiene estable",
-      description:
-        "El precio del Bitcoin se mantiene en un rango estrecho mientras los analistas esperan nuevas señales.",
-      url: "#",
-      image: "https://via.placeholder.com/300x180",
-    },
-  ]);
 
   return (
     <div className="App">
@@ -141,57 +110,8 @@ function App() {
         </div>
       </section>
 
-      {/* ✅ Noticias / News */}
-      <section id="news" className="news">
-        <h2>Noticias Financieras</h2>
-
-        {/* 🔎 Filtros de búsqueda */}
-        <div className="news-filters">
-          <input
-            type="text"
-            placeholder="Buscar por palabra clave..."
-            className="filter-input"
-          />
-
-          <select className="filter-select">
-            <option value="">Todas las fuentes</option>
-            <option value="bloomberg">Bloomberg</option>
-            <option value="reuters">Reuters</option>
-            <option value="investing">Investing</option>
-          </select>
-
-          <select className="filter-select">
-            <option value="">Todas las categorías</option>
-            <option value="acciones">Acciones</option>
-            <option value="etfs">ETFs</option>
-            <option value="forex">Forex</option>
-            <option value="economia">Economía</option>
-          </select>
-
-          <div className="filter-dates">
-            <label>Desde:</label>
-            <input type="date" className="filter-date" />
-            <label>Hasta:</label>
-            <input type="date" className="filter-date" />
-          </div>
-
-          <button className="btn-primary">Filtrar</button>
-        </div>
-
-        {/* 📰 Lista de noticias */}
-        <div className="news-grid">
-          {news.map((item, index) => (
-            <div key={index} className="news-card">
-              {item.image && <img src={item.image} alt={item.title} />}
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <a href={item.url} target="_blank" rel="noopener noreferrer">
-                Leer más
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Noticias → ahora en componente externo */}
+      <NewsSection  />
 
       {/* Footer */}
       <footer className="footer" id="footer">
