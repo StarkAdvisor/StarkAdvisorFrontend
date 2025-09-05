@@ -33,7 +33,7 @@ const NewsSection: React.FC = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/news` // 👈 endpoint del backend
+          `${process.env.REACT_APP_API_URL}/api/news/` // 👈 endpoint del backend
         );
         if (!response.ok) throw new Error("Error al cargar noticias");
         const data = await response.json();
