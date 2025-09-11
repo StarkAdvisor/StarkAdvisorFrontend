@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CryptoChart from "./components/CryptoChart";
 import NewsSection from "./components/NewsSection";
+import UserManager from "./components/UserManager"; 
 import "./App.css";
 
 type TabType = "Acciones" | "ETFs" | "Forex";
