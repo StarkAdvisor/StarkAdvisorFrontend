@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CryptoChart from "./components/CryptoChart";
 import NewsSection from "./components/NewsSection";
-import UserManager from "./components/UserManager"; 
+import MercadoFinanciero from "./components/MercadoFinanciero";
 import "./App.css";
 
 type TabType = "Acciones" | "ETFs" | "Forex";
@@ -113,6 +113,9 @@ function App() {
 
       {/* Noticias → ahora en componente externo */}
       <NewsSection  />
+
+      {/* Mercado Financiero */}
+      <MercadoFinanciero />
 
       {/* Footer */}
       <footer className="footer" id="footer">

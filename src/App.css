@@ -425,3 +425,34 @@ section {
     width: 100%;
   }
 }
+
+/* Contenedor de los botones */
+.category-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Estilos base de cada botón */
+.tab {
+  padding: 10px 15px;
+  background: #eee;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+/* Hover sobre botones */
+.tab:hover {
+  background: #ddd;
+}
+
+/* Estilo cuando está activo */
+.tab.active {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
