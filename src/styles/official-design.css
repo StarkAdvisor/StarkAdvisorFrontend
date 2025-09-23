@@ -1,0 +1,370 @@
+/* 
+StarkAdvisor - Estilos Oficiales
+Tipografía y Paleta de Colores según Especificaciones del Proyecto
+*/
+
+/* ========================================
+   TIPOGRAFÍA OFICIAL
+======================================== */
+
+/* Fuente principal: Segoe UI Semibold */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
+
+/* Variables de tipografía */
+:root {
+  /* Fuentes */
+  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* Tamaños tipográficos según especificación */
+  --font-size-h1: 32px;      /* Títulos principales */
+  --font-size-h2: 24px;      /* Subtítulos */
+  --font-size-h3: 18px;      /* Encabezados secundarios */
+  --font-size-base: 16px;    /* Texto base (párrafo) */
+  --font-size-small: 14px;   /* Footer, texto secundario */
+  
+  /* Pesos de fuente */
+  --font-weight-semibold: 600;
+  --font-weight-regular: 400;
+}
+
+/* ========================================
+   PALETA DE COLORES OFICIAL
+======================================== */
+
+:root {
+  /* Colores principales */
+  --color-primary: #004080;        /* Azul oscuro */
+  --color-secondary: #0F9D58;      /* Verde financiero */
+  --color-alert: #AA0000;          /* Rojo de alerta */
+  
+  /* Colores neutrales */
+  --color-white: #FFFFFF;          /* Fondo principal */
+  --color-gray-light: #F5F5F5;     /* Fondos secundarios, bordes */
+  --color-gray-medium: #666666;    /* Texto secundario, iconos */
+  --color-black: #000000;          /* Texto principal */
+  --color-gray-very-light: #FAFAFA; /* Filas alternadas */
+  
+  /* Colores de estado */
+  --color-success: #0F9D58;        /* Positivo/Éxito */
+  --color-warning: #F4B400;        /* Advertencia */
+  --color-error: #AA0000;          /* Negativo/Error */
+  --color-error-light: #FFE6E6;    /* Fondo claro para errores */
+  
+  /* Colores adicionales para hover */
+  --color-primary-hover: #003366;  /* Azul oscuro hover */
+  --color-hover-light: #F0F0F0;    /* Gris claro hover */
+  
+  /* Colores de hover/interacción */
+  --color-primary-hover: #003366;  /* Azul oscuro hover */
+}
+
+/* ========================================
+   RESET Y BASE
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  line-height: 1.5;
+}
+
+/* ========================================
+   JERARQUÍA TIPOGRÁFICA
+======================================== */
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+}
+
+/* ========================================
+   COMPONENTES BÁSICOS
+======================================== */
+
+/* Botones principales según especificación */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-gray-medium);
+  cursor: not-allowed;
+}
+
+/* Botones secundarios */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Inputs según especificación */
+.form-input {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 64, 128, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--color-gray-medium);
+}
+
+/* Labels */
+.form-label {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL
+======================================== */
+
+/* Banner superior sticky según especificación */
+.header-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 16px 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-banner .logo {
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}
+
+.header-banner .nav-link {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.header-banner .nav-link:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Cuerpo principal */
+.main-content {
+  min-height: calc(100vh - 140px); /* Altura mínima menos header y footer */
+  background-color: var(--color-white);
+  padding: 24px;
+}
+
+/* Footer según especificación */
+.footer {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-medium);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid var(--color-gray-light);
+}
+
+/* ========================================
+   COMPONENTES DE ESTADO
+======================================== */
+
+/* Indicadores de éxito */
+.status-success {
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Indicadores de error */
+.status-error {
+  color: var(--color-error);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Indicadores de advertencia */
+.status-warning {
+  color: var(--color-warning);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
+   UTILIDADES
+======================================== */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.w-full { width: 100%; }
+.max-w-md { max-width: 28rem; }
+.max-w-lg { max-width: 32rem; }
+.max-w-xl { max-width: 36rem; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.hidden { display: none; }
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+  .header-banner {
+    padding: 12px 16px;
+  }
+  
+  .main-content {
+    padding: 16px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ========================================
+   LAYOUT Y SIDEBAR
+======================================== */
+
+/* Asegurar que el body tenga margin 0 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  background-color: var(--color-gray-light);
+}
+
+/* Estilos responsivos para el layout con sidebar */
+@media (max-width: 768px) {
+  /* En móviles, el sidebar se podría ocultar o convertir en menú hamburguesa */
+  .layout-mobile {
+    margin-left: 0 !important;
+  }
+  
+  .sidebar-mobile {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-mobile.open {
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   ANIMACIONES
+======================================== */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
