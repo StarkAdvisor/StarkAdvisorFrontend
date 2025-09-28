@@ -369,59 +369,323 @@ section {
   scroll-margin-top: 100px; /* Ajusta este valor a la altura del navbar */
 }
 
-/* === Filtros de Noticias === */
-.news-filters {
+/* ====== Estilos Ajustados para Mercado Financiero ====== */
+
+.financial-market {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  color: #000000;
+}
+
+/* ===== Títulos ===== */
+.financial-market h1 {
+  text-align: center;
+  font-family: 'Segoe UI Semibold', 'Segoe UI', sans-serif;
+  font-size: 24px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.financial-market h2 {
+  text-align: center;
+  font-family: 'Segoe UI Semibold', 'Segoe UI', sans-serif;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+/* ===== Subtítulos / etiquetas ===== */
+.label,
+.subtitle,
+.financial-market p {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #666666;
+}
+
+/* ===== Selector de Categorías ===== */
+.category-selector {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
-.filter-input,
-.filter-select,
-.filter-date {
-  padding: 0.5rem 0.8rem;
+.category-selector .tab {
+  padding: 10px 16px;
+  border: none;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.filter-select {
-  background-color: #fff;
+.category-selector .tab:hover {
+  background: #f5f5f5;
+}
+
+.category-selector .tab.active {
+  background: #004080;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ===== Tabla de Activos ===== */
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.table-wrapper {
+  width: 90%;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+}
+
+.custom-table thead th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #000000;       
+  padding: 12px;
+  text-align: center;
+  border: none; 
+}
+
+.custom-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #000000;
+  border: none; 
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+  background: #ffffff; 
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background: #fafafa;  
+}
+
+.custom-table tbody tr:hover {
+  background: #f0f0f0;
   cursor: pointer;
 }
 
-.filter-dates {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.custom-table tr.selected {
+  background: #e6f0ff;
+  font-weight: 600;
 }
 
-.filter-dates label {
-  font-size: 0.9rem;
-  font-weight: 500;
+.custom-table td.positivo {
+  color: #0F9D58;
+  font-weight: bold;
 }
 
-/* Botón de filtrar */
-.news-filters .btn-primary {
-  padding: 0.5rem 1rem;
-  font-size: 0.95rem;
+.custom-table td.negativo {
+  color: #AA0000;
+  font-weight: bold;
 }
 
-/* Responsividad filtros */
+.custom-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background: #ffffff;
+}
+
+.custom-table tr:hover {
+  background: #fffefe;
+  cursor: pointer;
+}
+
+.custom-table tr.selected {
+  background: #e6f0ff;
+  font-weight: 600;
+}
+
+.custom-table td.positivo {
+  color: #0F9D58;
+  font-weight: bold;
+}
+
+.custom-table td.negativo {
+  color: #AA0000;
+  font-weight: bold;
+}
+
+.error {
+  color: #AA0000;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ===== Gráficos ===== */
+.chart-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.recharts-cartesian-axis-tick line,
+.recharts-cartesian-axis-line {
+  stroke: #666666;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: #666666;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+}
+
+/* ===== Botones principales ===== */
+button.primary {
+  background: #004080;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+button.primary:hover {
+  background: #003366;
+}
+
+.chart-container {
+  margin-top: 24px;
+  max-width: 700px;
+  margin-inline: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  height: 320px; 
+}
+
+
+.chart-container h2 {
+  font-family: 'Segoe UI Semibold', 'Segoe UI', sans-serif;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
 @media (max-width: 768px) {
-  .news-filters {
+
+  .category-selector {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .category-selector .tab {
+    flex: 1 1 auto; 
+    font-size: 13px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto; 
+    padding: 12px;
+  }
+
+  .custom-table {
+    font-size: 13px;
+    min-width: 600px;  
+  }
+
+  .custom-table thead th,
+  .custom-table tbody td {
+    padding: 10px 8px;
+  }
+
+  .chart-container {
+    padding: 12px;
+    height: 260px;
+  }
+
+  .chart-container h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .category-selector {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .filter-dates {
-    flex-direction: column;
-    align-items: flex-start;
+  .category-selector .tab {
+    width: 100%;
+    font-size: 12px;
+    padding: 8px;
   }
 
-  .news-filters .btn-primary {
+  .custom-table {
+    font-size: 12px;
+  }
+
+  .custom-table thead {
+    display: none; 
+  }
+
+  .custom-table tbody tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    background: #fff;
+  }
+
+  .custom-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 4px;
+    border: none;
+  }
+
+  .custom-table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #444;
+  }
+
+  button.primary {
     width: 100%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .chart-container {
+    height: 220px;
+    padding: 10px;
   }
 }
