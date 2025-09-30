@@ -125,16 +125,16 @@
   box-shadow: 0 4px 14px rgba(0,0,0,.06);
   display: flex;
   flex-direction: column;
-  height: 100%;          /* 🔥 ocupar todo el alto del panel central */
-  max-height: calc(100vh - 120px); /* 🔥 evitar que se desborde la ventana */
-  overflow: hidden;      /* 🔥 evita que el footer quede flotando fuera */
+  height: 100%;          
+  max-height: calc(100vh - 120px); 
+  overflow: hidden;    
 }
 
 /* Cuerpo con scroll interno */
 .sa-chat__body {
   flex: 1;
   padding: 16px;
-  overflow-y: auto;      /* 🔥 el scroll ahora está aquí */
+  overflow-y: auto;      
   background: #f7fbff;
 }
 
@@ -147,5 +147,32 @@
   background: #fff;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  flex-shrink: 0;        /* 🔥 evita que se colapse con el scroll */
+  flex-shrink: 0;        
+}
+/* ===== Sugerencias ===== */
+.sa-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.sa-suggestion-btn {
+  background: #eef4ff;
+  border: 1px solid #d9e3ff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.sa-suggestion-btn:hover {
+  background: #d9e3ff;
+}
+
+.sa-suggestion-btn:active {
+  transform: scale(0.97);
 }

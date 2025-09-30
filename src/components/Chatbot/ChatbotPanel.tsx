@@ -13,12 +13,8 @@ type Msg = {
 const now = () =>
   new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
-/** ===== Backend =====
- * Si prefieres .env, cambia a:
- * const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:8000';
- */
 const API_BASE = 'http://localhost:8000';
-const CHAT_ENDPOINT = '/api/chatbot/'; // tu ruta real
+const CHAT_ENDPOINT = '/api/chatbot/';
 
 const ChatbotPanel: React.FC = () => {
   const [messages, setMessages] = useState<Msg[]>([
@@ -31,9 +27,27 @@ const ChatbotPanel: React.FC = () => {
   ]);
   const [draft, setDraft] = useState('');
   const [sending, setSending] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true); // 🔥 nuevo
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll al último mensaje
+  // Preguntas sugeridas
+  const suggestions = [
+    "¿Qué es StarkAdvisor?",
+    "¿Cómo me registro en StarkAdvisor?",
+    "¿Quiénes hicieron StarkAdvisor?",
+    "¿En qué idiomas hablas Starky?",
+    "¿Qué tipo de preguntas te puedo hacer Starky?",
+    
+    
+    "¿Qué es una acción?",
+    "¿Qué es un ETF?",
+    "¿Qué es una commodity?",
+    "¿Qué es el mercado Forex?",
+    "¿Qué significa par de divisas?",
+    "¿Qué es el S&P 500?"
+  ];
+
+  // Auto-scroll
   useEffect(() => {
     const el = bodyRef.current;
     if (!el) return;
@@ -42,11 +56,13 @@ const ChatbotPanel: React.FC = () => {
 
   const canSend = useMemo(() => draft.trim().length > 0 && !sending, [draft, sending]);
 
-  const send = async () => {
-    const text = draft.trim();
+  const send = async (customText?: string) => {
+    const text = (customText ?? draft.trim());
     if (!text) return;
 
-    // 1) pinta el mensaje del usuario (MISMO DISEÑO)
+    // Primera interacción → oculta sugerencias
+    if (showSuggestions) setShowSuggestions(false);
+
     const userMsg: Msg = {
       id: crypto.randomUUID(),
       role: 'user',
@@ -58,7 +74,6 @@ const ChatbotPanel: React.FC = () => {
     setSending(true);
 
     try {
-      // 2) POST { question } al backend
       const res = await fetch(`${API_BASE}${CHAT_ENDPOINT}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,11 +85,10 @@ const ChatbotPanel: React.FC = () => {
         try {
           const j = await res.json();
           detail = j?.message || detail;
-        } catch { }
+        } catch {}
         throw new Error(detail);
       }
 
-      // 3) respuesta { answer }
       const data: { answer?: string } = await res.json();
       const botText = data?.answer ?? 'No recibí "answer" desde el servidor.';
 
@@ -86,15 +100,12 @@ const ChatbotPanel: React.FC = () => {
       };
       setMessages((prev) => [...prev, botMsg]);
     } catch (e: any) {
-      // Mensaje de error en burbuja del bot (Misma UI)
       setMessages((prev) => [
         ...prev,
         {
           id: crypto.randomUUID(),
           role: 'bot',
-          text:
-            '⚠️ No pude conectar con el backend.' +
-            (e?.message ? ` Detalle: ${e.message}` : ''),
+          text: '⚠️ No pude conectar con el backend.' + (e?.message ? ` Detalle: ${e.message}` : ''),
           time: now(),
         },
       ]);
@@ -119,11 +130,12 @@ const ChatbotPanel: React.FC = () => {
         time: now(),
       },
     ]);
+    setShowSuggestions(true); // 🔥 volver a mostrar sugerencias
   };
 
   return (
     <section className="sa-chat">
-      {/* Header con gradiente + botón limpiar */}
+      {/* Header */}
       <header className="sa-chat__header">
         <div className="sa-chat__title">
           <div className="sa-chat__logo">
@@ -142,7 +154,7 @@ const ChatbotPanel: React.FC = () => {
         </button>
       </header>
 
-      {/* Timeline (MISMAS BURBUJAS que tenías) */}
+      {/* Timeline */}
       <main ref={bodyRef} className="sa-chat__body" aria-live="polite">
         {messages.map((m) => (
           <div key={m.id} className={`sa-row sa-row--${m.role}`}>
@@ -171,7 +183,7 @@ const ChatbotPanel: React.FC = () => {
           </div>
         ))}
 
-        {/* 🔥 Indicador de escribiendo solo cuando está enviando */}
+        {/* Escribiendo */}
         {sending && (
           <div className="sa-row sa-row--bot">
             <div className="sa-avatar" aria-hidden="true">
@@ -188,8 +200,18 @@ const ChatbotPanel: React.FC = () => {
         )}
       </main>
 
+      {/* 🔥 Preguntas sugeridas */}
+      {showSuggestions && (
+        <div className="sa-suggestions">
+          {suggestions.map((s, i) => (
+            <button key={i} className="sa-suggestion-btn" onClick={() => send(s)}>
+              {s}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* Input sticky */}
+      {/* Input */}
       <footer className="sa-chat__footer">
         <textarea
           className="sa-input"
@@ -200,7 +222,7 @@ const ChatbotPanel: React.FC = () => {
           onKeyDown={onKeyDown}
           disabled={sending}
         />
-        <button className="sa-btn sa-btn--primary" onClick={send} disabled={!canSend}>
+        <button className="sa-btn sa-btn--primary" onClick={() => send()} disabled={!canSend}>
           {sending ? 'Enviando…' : 'Enviar'}
         </button>
       </footer>
