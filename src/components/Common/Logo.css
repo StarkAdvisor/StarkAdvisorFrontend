@@ -1,0 +1,137 @@
+.stark-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo-icon {
+  position: relative;
+}
+
+.logo-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.logo-dollar {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fbbf24;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.logo-chart {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  align-items: end;
+  gap: 1px;
+  z-index: 1;
+}
+
+.chart-bar {
+  width: 2px;
+  background: #10b981;
+  border-radius: 1px;
+}
+
+.bar1 {
+  height: 4px;
+}
+
+.bar2 {
+  height: 6px;
+}
+
+.bar3 {
+  height: 8px;
+}
+
+.chart-arrow {
+  position: absolute;
+  top: -6px;
+  right: -2px;
+  font-size: 8px;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-stark {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.logo-advisor {
+  font-size: 16px;
+  font-weight: 400;
+  color: #e5e7eb;
+  margin-top: -2px;
+}
+
+/* Tamaños */
+.stark-logo.small .logo-circle {
+  width: 35px;
+  height: 35px;
+}
+
+.stark-logo.small .logo-dollar {
+  font-size: 18px;
+}
+
+.stark-logo.small .logo-stark {
+  font-size: 16px;
+}
+
+.stark-logo.small .logo-advisor {
+  font-size: 12px;
+}
+
+.stark-logo.large .logo-circle {
+  width: 70px;
+  height: 70px;
+}
+
+.stark-logo.large .logo-dollar {
+  font-size: 32px;
+}
+
+.stark-logo.large .logo-stark {
+  font-size: 28px;
+}
+
+.stark-logo.large .logo-advisor {
+  font-size: 22px;
+}
+
+/* Variante oscura */
+.stark-logo.dark .logo-circle {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.stark-logo.dark .logo-stark {
+  color: #1f2937;
+}
+
+.stark-logo.dark .logo-advisor {
+  color: #6b7280;
+}

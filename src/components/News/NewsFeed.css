@@ -1,0 +1,143 @@
+/* Base */
+.container { max-width:1200px; margin:0 auto; padding:0 12px; }
+.nf-header { display:flex; flex-direction:column; gap:12px; margin:10px 0 14px; }
+.nf-title { margin:0; font-size:1.25rem; font-weight:600; }
+.nf-controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+
+/* Inputs generales */
+.form-input{
+    background:#fff; color:inherit;
+    border:1px solid rgba(14,33,58,0.08);
+    border-radius:10px; padding:8px 10px; outline:none;
+}
+.form-input:focus{ border-color:rgba(37,99,235,0.35); box-shadow:0 0 0 3px rgba(37,99,235,0.12); }
+.nf-select{ min-width:180px; }
+
+/* ===== Fuentes: chips ===== */
+.nf-sources{ display:flex; flex-direction:column; gap:6px; min-width:260px; }
+.nf-sources__label{ font-size:.78rem; color:#6b7280; }
+.nf-sources__box{ display:flex; align-items:center; gap:8px; background:#f8fafc; padding:8px; border-radius:12px; border:1px solid rgba(14,33,58,0.08); }
+.nf-sources__chips{ display:flex; gap:6px; align-items:center; overflow-x:auto; padding-bottom:2px; flex:1 1 auto; min-height:36px; }
+.nf-sources__hint{ color:#6b7280; font-size:.88rem; padding:6px 8px; }
+.nf-source-chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#eef2ff; border:1px solid rgba(37,99,235,0.25); font-size:.88rem; white-space:nowrap; }
+.nf-source-chip__text{ max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.nf-source-chip__remove{ background:transparent; border:none; font-size:1rem; line-height:1; padding:2px 6px; cursor:pointer; border-radius:6px; }
+.nf-sources__actions{ display:flex; align-items:center; gap:8px; margin-left:8px; }
+.nf-sources__select{ min-width:180px; max-width:260px; padding:6px 8px; }
+.nf-sources__clear{ background:transparent; border:none; color:#2563eb; cursor:pointer; font-size:.85rem; }
+
+/* ===== Rango de fechas (clean) ===== */
+.nf-daterange { display:flex; flex-direction:column; gap:6px; min-width:280px; }
+.nf-daterange__label { font-size:.78rem; color:#6b7280; }
+
+/* shell “card” con inputs sin bordes internos */
+.nf-daterange__shell{
+    display:flex; align-items:center; gap:10px;
+    background:#f8fafc;
+    border:1px solid rgba(14,33,58,0.08);
+    border-radius:12px;
+    padding:8px 10px;
+}
+.nf-daterange__input{
+    border:none; background:transparent; padding:6px 8px; border-radius:8px; min-width:150px;
+}
+.nf-daterange__input:focus{
+    outline:none; box-shadow:0 0 0 3px rgba(37,99,235,0.10);
+}
+.nf-daterange__sep{ color:#6b7280; user-select:none; }
+.nf-daterange__clear{ margin-left:auto; }
+
+/* atajos */
+.nf-daterange__quick{ display:flex; gap:6px; }
+.nf-quick{
+    background:#fff; border:1px solid rgba(14,33,58,0.12); border-radius:999px;
+    padding:6px 10px; font-size:.85rem; cursor:pointer;
+}
+.nf-quick:hover{ border-color:rgba(37,99,235,0.35); box-shadow:0 0 0 3px rgba(37,99,235,0.10); }
+
+/* ===== Cards + barra de sentimiento ===== */
+.nf-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.nf-card {
+  background:#fff;
+  border:1px solid rgba(14,33,58,0.08);
+  border-radius:12px;
+  padding:14px;
+  box-shadow:0 6px 18px rgba(12,20,40,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  transition:transform .14s ease, box-shadow .14s ease;
+
+  /* 👇 asegura que la barra de sentimiento siempre quede abajo */
+  justify-content: space-between;
+}
+
+.nf-description {
+  margin:0;
+  color:#334155;
+  font-size:.95rem;
+  line-height:1.35;
+  flex-grow:1; /* 👈 empuja la barra hacia abajo */
+}
+
+.nf-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(12,20,40,0.08); }
+.nf-row{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.nf-left{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.nf-right{ display:flex; align-items:center; gap:8px; }
+.nf-meta{ color:#6b7280; font-size:.85rem; }
+
+.nf-pill{ font-weight:600; padding:6px 10px; border-radius:999px; font-size:.85rem; display:inline-block; border:1px solid transparent; }
+.nf-pill--pos{ color:#16a34a; background:rgba(22,163,74,0.1); border-color:rgba(22,163,74,0.16); }
+.nf-pill--neg{ color:#ef4444; background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.14); }
+
+.nf-title-card{ margin:0; font-size:1rem; font-weight:600; }
+.nf-description{ margin:0; color:#334155; font-size:.95rem; line-height:1.35; }
+
+.nf-sentiment{ display:flex; align-items:center; gap:8px; }
+.nf-sentiment__track{ width:160px; height:10px; background:rgba(2,6,23,0.06); border-radius:999px; overflow:hidden; }
+.nf-sentiment__bar{ height:100%; transition:width .3s ease; }
+.nf-sentiment__bar.pos{ background:linear-gradient(90deg,#16a34a, rgba(22,163,74,0.25)); }
+.nf-sentiment__bar.neg{ background:linear-gradient(90deg,#ef4444, rgba(239,68,68,0.22)); }
+.nf-sentiment__score{ min-width:44px; text-align:right; font-weight:600; color:#6b7280; }
+
+.btn-secondary{ background:transparent; border:1px solid rgba(14,33,58,0.08); border-radius:10px; padding:8px 12px; font-weight:600; text-decoration:none; color:inherit; }
+.btn-secondary:hover{ border-color:rgba(37,99,235,0.35); box-shadow:0 0 0 3px rgba(37,99,235,0.12); }
+
+.nf-loading,.nf-empty,.nf-error{ padding:18px; text-align:center; color:#6b7280; }
+
+/* Responsive */
+@media (max-width:720px){
+    .nf-controls{ flex-direction:column; align-items:stretch; gap:10px; }
+    .nf-grid{ grid-template-columns:1fr; }
+    .nf-sentiment__track{ width:100%; }
+    .nf-daterange__shell{ flex-wrap:wrap; }
+    .nf-daterange__clear{ margin-left:0; }
+}
+
+.nf-daterange__clear {
+  margin-left: auto;
+}
+/* Botón principal azul */
+.btn-primary {
+  background-color: #2563eb; /* Azul Tailwind 600 */
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8; /* Azul más oscuro */
+}
+
+.nf-search-btn {
+  margin-left: auto; /* lo empuja al final de la fila */
+}
+
+/* Asegura que las fechas siempre queden en una fila nueva */
+.nf-daterange {
+  flex: 1 1 100%; /* fuerza a ocupar toda la fila */
+}

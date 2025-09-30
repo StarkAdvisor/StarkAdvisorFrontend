@@ -1,0 +1,254 @@
+/* 
+StarkAdvisor - Estilos Oficiales
+Tipografía y Paleta de Colores según Especificaciones del Proyecto
+*/
+
+/* ========================================
+   TIPOGRAFÍA OFICIAL
+======================================== */
+
+/* En producción solemos usar la instalada del sistema (Segoe UI).
+   El import de Google no existe para Segoe UI real; lo dejamos comentado. */
+/* @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap'); */
+
+/* Variables de tipografía */
+:root {
+    /* Fuentes */
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* Tamaños tipográficos */
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+    --font-size-h3: 18px;
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+
+    /* Pesos */
+    --font-weight-semibold: 600;
+    --font-weight-regular: 400;
+
+    /* Layout utilitario */
+    --container-max: 1200px;
+    --gap: 16px;
+}
+
+/* ========================================
+   PALETA DE COLORES OFICIAL
+======================================== */
+
+:root {
+    /* Principales */
+    --color-primary: #004080;
+    --color-secondary: #0F9D58;
+    --color-alert: #AA0000;
+
+    /* Neutrales */
+    --color-white: #FFFFFF;
+    --color-gray-light: #F5F5F5;
+    --color-gray-medium: #666666;
+    --color-black: #000000;
+    --color-gray-very-light: #FAFAFA;
+
+    /* Estado */
+    --color-success: #0F9D58;
+    --color-warning: #F4B400;
+    --color-error: #AA0000;
+    --color-error-light: #FFE6E6;
+
+    /* Interacción */
+    --color-primary-hover: #003366;
+    --color-hover-light: #F0F0F0;
+}
+
+/* === Variables extra usadas por el módulo TOD === */
+:root {
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.06);
+    --glass-bg: rgba(255,255,255,0.08);
+}
+
+/* ========================================
+   RESET Y BASE
+======================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-black);           /* Texto negro global */
+    background-color: var(--color-gray-light);
+    line-height: 1.5;
+}
+
+/* ========================================
+   JERARQUÍA TIPOGRÁFICA
+======================================== */
+
+h1 { font-size: var(--font-size-h1); font-weight: var(--font-weight-semibold); color: var(--color-black); margin-bottom: 1rem; }
+h2 { font-size: var(--font-size-h2); font-weight: var(--font-weight-semibold); color: var(--color-black); margin-bottom: 0.75rem; }
+h3 { font-size: var(--font-size-h3); font-weight: var(--font-weight-regular);  color: var(--color-black); margin-bottom: 0.5rem; }
+p  { font-size: var(--font-size-base); font-weight: var(--font-weight-regular); color: var(--color-black); margin-bottom: 0.75rem; }
+
+/* ========================================
+   COMPONENTES BÁSICOS
+======================================== */
+
+/* Botón primario */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color .25s ease;
+}
+.btn-primary:hover { background-color: var(--color-primary-hover); }
+.btn-primary:disabled { background-color: var(--color-gray-medium); cursor: not-allowed; }
+
+/* Botón secundario */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+.btn-secondary:hover { background-color: var(--color-primary); color: var(--color-white); }
+
+/* Inputs */
+.form-input {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-light);
+    border-radius: 6px;
+    padding: 12px 16px;
+    width: 100%;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 64, 128, 0.12);
+}
+.form-input::placeholder { color: var(--color-gray-medium); }
+
+/* Labels */
+.form-label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-black);
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL
+======================================== */
+
+.header-banner {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 16px 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+.header-banner .logo { font-size: 18px; font-weight: var(--font-weight-semibold); color: var(--color-white); }
+.header-banner .nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color .25s ease;
+}
+.header-banner .nav-link:hover { background-color: var(--color-primary-hover); }
+
+.main-content { min-height: calc(100vh - 140px); background-color: var(--color-white); padding: 24px; }
+.footer {
+    background-color: var(--color-gray-light);
+    color: var(--color-gray-medium);
+    font-size: var(--font-size-small);
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid var(--color-gray-light);
+}
+
+/* ========================================
+   UTILIDADES DE LAYOUT (responsive)
+======================================== */
+
+.container { width: min(100% - 32px, var(--container-max)); margin-inline: auto; }
+
+.grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--gap);
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--color-gray-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+
+/* Helpers */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mb-1 { margin-bottom: .5rem; } .mb-2 { margin-bottom: 1rem; } .mb-3 { margin-bottom: 1.5rem; } .mb-4 { margin-bottom: 2rem; }
+.mt-1 { margin-top: .5rem; }  .mt-2 { margin-top: 1rem; }  .mt-3 { margin-top: 1.5rem; }  .mt-4 { margin-top: 2rem; }
+.w-full { width: 100%; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.flex { display: flex; } .flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; } .justify-between { justify-content: space-between; }
+.hidden { display: none; }
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+    .header-banner { padding: 12px 16px; }
+    .main-content { padding: 16px; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; }
+    .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 14px; }
+}
+
+/* Sidebar móvil (si aplica) */
+@media (max-width: 768px) {
+    .layout-mobile { margin-left: 0 !important; }
+    .sidebar-mobile { transform: translateX(-100%); transition: transform .3s ease; }
+    .sidebar-mobile.open { transform: translateX(0); }
+}
+
+/* ========================================
+   ANIMACIONES
+======================================== */
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loading-spinner { animation: spin 1s linear infinite; }

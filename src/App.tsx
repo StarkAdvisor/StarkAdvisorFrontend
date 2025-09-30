@@ -1,141 +1,179 @@
-import React, { useState } from "react";
-import CryptoChart from "./components/CryptoChart";
-import NewsSection from "./components/NewsSection";
-import "./App.css";
+import React from 'react';
+import { Routes, Route, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-type TabType = "Acciones" | "ETFs" | "Forex";
+import { useAuth } from './hooks/useAuth';
+import Layout from './components/Layout/Layout';
+import UserProfile from './components/Profile/UserProfile';
+import TradeOfTheDay from './components/TradeOfTheDay/TradeOfTheDay';
+import ChatbotPanel from './components/Chatbot/ChatbotPanel';
+import NewsFeed from './components/News/NewsFeed'; // <—— Asegúrate que exista este componente
 
-type MarketEntry = {
-  name: string;
-  value: number;
-  change: number;
-  currency: string;
+import { User } from './types';
+import './styles/official-design.css';
+
+// Usuario DEMO cuando no hay sesión real
+const DEMO_USER: User = {
+  id: 'demo-1',
+  first_name: 'Usuario',
+  last_name: 'Demo',
+  username: 'demo',
+  email: 'demo@example.com',
+  risk_profile: 'moderate',
 };
 
-const marketData: Record<TabType, MarketEntry[]> = {
-  Acciones: [
-    { name: "Apple", value: 175.12, change: +1.25, currency: "USD" },
-    { name: "Microsoft", value: 312.45, change: -0.87, currency: "USD" },
-    { name: "TSLA", value: 255.18, change: 2.5, currency: "USD" },
-  ],
-  ETFs: [
-    { name: "SPY", value: 456.78, change: +0.45, currency: "USD" },
-    { name: "QQQ", value: 378.90, change: -1.12, currency: "USD" },
-    { name: "DIA", value: 350.75, change: 0.4, currency: "USD" },
-  ],
-  Forex: [
-    { name: "EUR/USD", value: 1.0845, change: -0.21, currency: "" },
-    { name: "USD/JPY", value: 146.32, change: +0.35, currency: "" },
-    { name: "GBP/USD", value: 1.265, change: 0.3, currency: "" },
-  ],
+/* Mapeo sección <-> ruta para que el Layout navegue por URL */
+const sectionToPath: Record<string, string> = {
+  dashboard: '/dashboard',
+  news: '/news',
+  trade: '/trade',
+  chatbot: '/chatbot',
+  profile: '/profile',
+  market: '/market',
+  logout: '/dashboard',
 };
 
-function App() {
-  const [activeTab, setActiveTab] = useState<TabType>("Acciones");
+const pathToSection = (pathname: string): string => {
+  if (pathname.startsWith('/news')) return 'news';
+  if (pathname.startsWith('/trade')) return 'trade';
+  if (pathname.startsWith('/chatbot')) return 'chatbot';
+  if (pathname.startsWith('/profile')) return 'profile';
+  if (pathname.startsWith('/market')) return 'market';
+  return 'dashboard';
+};
 
-  const sampleChartData = [
-    { time: "10:00", price: 100 },
-    { time: "10:05", price: 102 },
-    { time: "10:10", price: 101 },
-    { time: "10:15", price: 103 },
-    { time: "10:20", price: 105 },
-  ];
+/* ========= Shell: envuelve las páginas con tu Layout ========= */
+function Shell({ user }: { user: User }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentSection = pathToSection(location.pathname);
+
+  const onSectionChange = (section: string) => {
+    const path = sectionToPath[section] ?? '/dashboard';
+    navigate(path);
+  };
 
   return (
-    <div className="App">
-      {/* Navbar */}
-      <header className="App-header">
-        <div className="logo">StarkAdvisor</div>
-        <nav className="nav-links">
-          <input type="text" placeholder="Search" className="search-box" />
-          <a href="#market-summary">Market Summary</a>
-          <a href="#news">Noticias / News</a>
-          <a href="#footer">Sobre Nosotros</a>
-        </nav>
-        <div className="header-actions">
-          <button className="btn-secondary">LOGIN</button>
-          <button className="btn-primary">REGISTRARSE</button>
-        </div>
-      </header>
+    <Layout
+      currentSection={currentSection}
+      onSectionChange={onSectionChange}
+      user={user}
+      onLogout={() => onSectionChange('logout')}
+    >
+      <Outlet />
+    </Layout>
+  );
+}
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>StarkAdvisor.</h1>
-          <p>The best trades require research, then commitment.</p>
-          <button className="btn-primary">Get started for free</button>
-        </div>
-      </section>
+/* ========= Páginas (las mismas vistas que tenías) ========= */
+function Dashboard() {
+  const navigate = useNavigate();
 
-      {/* Market Summary */}
-      <section id="market-summary" className="market-summary">
-        <h2>Market summary</h2>
+  const cardStyle: React.CSSProperties = {
+    backgroundColor: '#fff',
+    padding: '24px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #e5e7eb',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+  };
 
-        {/* Tabs */}
-        <div className="tabs">
-          {(Object.keys(marketData) as TabType[]).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={activeTab === tab ? "tab active" : "tab-btn"}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+  const Card = ({ title, to, desc }: { title: string; to: string; desc: string }) => (
+    <div
+      style={cardStyle}
+      onClick={() => navigate(to)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,.15)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,.1)';
+      }}
+    >
+      <h3 style={{ color: '#004080', marginBottom: 8 }}>{title}</h3>
+      <p style={{ color: '#666', fontSize: 16 }}>{desc}</p>
+    </div>
+  );
 
-        {/* Tab content */}
-        <div className="tab-content">
-          {marketData[activeTab].length === 0 ? (
-            <p>No data available</p>
-          ) : (
-            marketData[activeTab].map((entry) => (
-              <div key={entry.name} className="market-entry">
-                <strong>{entry.name}</strong>
-                <p>
-                  {entry.value.toLocaleString()} {entry.currency}{" "}
-                  <span style={{ color: entry.change < 0 ? "red" : "green" }}>
-                    {entry.change > 0 ? "+" : ""}
-                    {entry.change}%
-                  </span>
-                </p>
+  return (
+    <div>
+      <div style={{ marginBottom: 32 }}>
+        <h1>Panel de Control</h1>
+        <p style={{ fontSize: 16, color: '#666' }}>
+          Bienvenido a StarkAdvisor
+        </p>
+      </div>
 
-                {/* 🎯 Gráfico pequeño */}
-                <div className="chart-container">
-                  <CryptoChart name={entry.name} data={sampleChartData} />
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </section>
-
-      {/* Noticias → ahora en componente externo */}
-      <NewsSection  />
-
-      {/* Footer */}
-      <footer className="footer" id="footer">
-        <div className="footer-container">
-          <div className="footer-left">
-            <h4>StarkAdvisor</h4>
-            <p>Tu aliado inteligente en inversiones financieras.</p>
-          </div>
-          <div className="footer-right">
-            <div className="footer-column">
-              <h4>More than a product</h4>
-              <p>Innovación</p>
-              <p>Confianza</p>
-            </div>
-            <div className="footer-column">
-              <h4>Contact Info</h4>
-              <p>Email: contacto@starkadvisor.com</p>
-              <p>Tel: +57 123 456 7890</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: 24,
+        }}
+      >
+        <Card title="NOTICIAS" to="/news" desc="Titulares, enlace y sentimiento" />
+        <Card title="TRADE DEL DÍA" to="/trade" desc="Operaciones y métricas del día" />
+        <Card title="CHATBOT FINANCIERO" to="/chatbot" desc="Asistente para tus consultas" />
+        <Card title="MERCADO FINANCIERO" to="/market" desc="Módulo en desarrollo" />
+        <Card title="MI PERFIL" to="/profile" desc="Configuración de cuenta" />
+      </div>
     </div>
   );
 }
 
-export default App;
+function Market() {
+  return (
+    <div style={{ textAlign: 'center', padding: '48px 24px' }}>
+      <h1>Mercado Financiero</h1>
+      <p style={{ color: '#666', fontSize: 16 }}>Módulo en desarrollo</p>
+    </div>
+  );
+}
+
+function ProfilePage({ user, onUpdate }: { user: User; onUpdate: (u: Partial<User>) => Promise<boolean> }) {
+  return (
+    <UserProfile
+      user={user}
+      onUpdateProfile={onUpdate}
+      onChangePassword={async () => true}
+      isLoading={false}
+    />
+  );
+}
+
+/* ========= App con rutas reales ========= */
+export default function App() {
+  const { user, updateUser } = useAuth();
+  const effectiveUser: User = user ?? DEMO_USER;
+
+  const handleUpdateProfile = async (updates: Partial<User>) => {
+    if (!user) return true; // DEMO (sin backend)
+    try {
+      return await updateUser(user.id, updates);
+    } catch {
+      return false;
+    }
+  };
+
+  return (
+    <Routes>
+      {/* Todo bajo "/" usa tu Layout */}
+      <Route element={<Shell user={effectiveUser} />}>
+        {/* raíz -> dashboard */}
+        <Route index element={<Navigate to="/dashboard" replace />} />
+
+        {/* Rutas del producto */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/news" element={<NewsFeed />} />      {/* <<< Noticias por URL */}
+        <Route path="/trade" element={<TradeOfTheDay />} />
+        <Route path="/chatbot" element={<ChatbotPanel />} />
+        <Route path="/market" element={<Market />} />
+        <Route path="/profile" element={<ProfilePage user={effectiveUser} onUpdate={handleUpdateProfile} />} />
+
+        {/* 404 -> dashboard */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Route>
+    </Routes>
+  );
+}
