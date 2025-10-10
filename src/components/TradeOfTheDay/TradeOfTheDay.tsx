@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './TradeOfTheDay.css';
 
-/** Backend (formato único) */
-const API_URL = 'http://localhost:8000/api/trade-of-the-day/';
+/** Backend (usar env en prod si está definida) */
+const API_URL =
+  (process.env.REACT_APP_API_URL
+    ? `${process.env.REACT_APP_API_URL.replace(/\/+$/, '')}/api/trade-of-the-day/`
+    : 'http://localhost:8000/api/trade-of-the-day/');
 
-type Market = 'FOREX' | 'CRYPTO' | 'STOCK' | 'FUTURES';
 type Direction = 'LONG' | 'SHORT';
-type TF = 'M15' | 'H1' | 'H4' | 'D1';
 
 /** Lo que devuelve tu backend */
 type ApiRow = {
@@ -121,7 +122,7 @@ const Card: React.FC<{ t: TradeCard; onSelect: (sym: string) => void }> = ({ t, 
   return (
     <article
       className="tile surface"
-      role="article"
+      /* role="article"  <- redundante; se elimina para cumplir eslint jsx-a11y/no-redundant-roles */
       style={{ color: 'var(--color-black)' }}
       onClick={() => onSelect(t.symbol)}
     >
@@ -238,8 +239,8 @@ const TradeDetail: React.FC<{ base: TradeCard | null }> = ({ base }) => {
             <Metric label="Stop" value={<span>{stop.toFixed(2)}</span>} />
             <Metric label="Objetivo" value={<span>{target.toFixed(2)}</span>} />
             <Metric label="R:R" value={<span>{rr.toFixed(2)}x</span>} />
-            <Metric label="Riesgo" value={<span>{risk.toFixed(2)}</span>} />
-            <Metric label="Recompensa" value={<span>{reward.toFixed(2)}</span>} />
+            <Metric label="Riesgo" value={<span>{Math.abs(entry - stop).toFixed(2)}</span>} />
+            <Metric label="Recompensa" value={<span>{Math.abs(target - entry).toFixed(2)}</span>} />
             <Metric label="Confianza" value={<span>{confidence}%</span>} />
           </div>
         </article>
