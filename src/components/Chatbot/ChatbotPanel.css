@@ -1,0 +1,178 @@
+/* ===== Contenedor ===== */
+.sa-chat{
+    background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+    display:flex;flex-direction:column;min-height:520px
+}
+
+/* ===== Header ===== */
+.sa-chat__header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;border-bottom:1px solid #e5e7eb;
+    background:linear-gradient(90deg,#0d5a88,#0f9d58);color:#fff;border-top-left-radius:12px;border-top-right-radius:12px
+}
+.sa-chat__title{display:flex;gap:12px;align-items:center}
+.sa-chat__logo{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center}
+.sa-logo-pulse{width:10px;height:10px;border-radius:999px;background:#fff;animation:sa-pulse 1.6s infinite ease-in-out}
+@keyframes sa-pulse{0%,100%{opacity:.35;transform:scale(.9)}50%{opacity:1;transform:scale(1.15)}}
+.sa-chat__name{font-weight:700}
+.sa-chat__time{font-size:12px;opacity:.9}
+
+/* ===== Timeline ===== */
+.sa-chat__body{padding:16px;overflow:auto;background:#f7fbff;flex:1}
+
+/* ===== Fila de mensaje ===== */
+.sa-row{
+    display:flex;gap:10px;align-items:flex-end;margin:12px 0;width:100%;
+}
+.sa-row--bot{justify-content:flex-start}
+.sa-row--user{justify-content:flex-end}
+
+/* ===== Avatares ===== */
+.sa-avatar{
+    width:36px;height:36px;flex:0 0 36px;border-radius:50%;
+    background:#eef2ff;border:1px solid #d9e3ff;display:grid;place-items:center
+}
+.sa-avatar--user{background:#e8fff2;border-color:#c8f0da}
+.sa-avatar__icon{font-size:18px}
+.sa-avatar__initials{font-size:12px;color:#0f5132}
+
+/* ===== Burbujas ===== */
+/* ¡Aumentamos la especificidad para que nada lo pise! */
+.sa-chat .sa-bubble{
+    position:relative;
+    max-width:75%;
+    padding:10px 12px;
+    border-radius:14px;
+    border:1px solid transparent;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    word-wrap:break-word;
+}
+.sa-bubble__text{white-space:pre-wrap}
+.sa-bubble__meta{font-size:12px;color:#666;margin-top:6px}
+
+/* Colores por rol */
+.sa-chat .sa-bubble--bot{
+    background:#ffffff;
+    border-color:#e5e7eb;
+    border-top-left-radius:8px;
+    margin-left:4px;
+}
+.sa-chat .sa-bubble--user{
+    background:#eef4ff;
+    border-color:#d9e3ff;
+    border-top-right-radius:8px;
+    margin-right:4px;
+}
+
+/* Colitas (tails) */
+.sa-chat .sa-bubble--bot::after{
+    content:"";
+    position:absolute;left:-6px;bottom:10px;
+    width:0;height:0;border-style:solid;
+    border-width:6px 6px 6px 0;
+    border-color:transparent #e5e7eb transparent transparent; /* borde */
+}
+.sa-chat .sa-bubble--bot::before{
+    content:"";
+    position:absolute;left:-5px;bottom:11px;
+    width:0;height:0;border-style:solid;
+    border-width:5px 5px 5px 0;
+    border-color:transparent #ffffff transparent transparent; /* relleno */
+}
+.sa-chat .sa-bubble--user::after{
+    content:"";
+    position:absolute;right:-6px;bottom:10px;
+    width:0;height:0;border-style:solid;
+    border-width:6px 0 6px 6px;
+    border-color:transparent transparent transparent #d9e3ff; /* borde */
+}
+.sa-chat .sa-bubble--user::before{
+    content:"";
+    position:absolute;right:-5px;bottom:11px;
+    width:0;height:0;border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-color:transparent transparent transparent #eef4ff; /* relleno */
+}
+
+/* ===== Input ===== */
+.sa-chat__footer{
+    display:flex;gap:8px;padding:12px;border-top:1px solid #e5e7eb;
+    background:#fff;border-bottom-left-radius:12px;border-bottom-right-radius:12px
+}
+.sa-input{
+    flex:1;resize:none;border:1px solid #e5e7eb;border-radius:10px;
+    padding:10px 12px;font-family:inherit;font-size:14px;background:#fff;color:#000
+}
+.sa-input:disabled{background:#f6f7fb}
+.sa-btn{padding:10px 14px;border-radius:10px;border:1px solid transparent;cursor:pointer;font-weight:700}
+.sa-btn--primary{background:#004080;color:#fff;border-color:#003366}
+.sa-btn--primary:disabled{opacity:.6;cursor:not-allowed}
+.sa-btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+
+/* ===== Indicador escribiendo... ===== */
+.sa-typing{display:inline-flex;gap:6px;align-items:center}
+.sa-dot{width:6px;height:6px;border-radius:999px;background:#9aa9ff;opacity:.55;animation:sa-blink 1s infinite ease-in-out}
+.sa-dot:nth-child(2){animation-delay:.15s}
+.sa-dot:nth-child(3){animation-delay:.3s}
+@keyframes sa-blink{0%,80%,100%{transform:translateY(0);opacity:.55}40%{transform:translateY(-4px);opacity:1}}
+
+/* Contenedor principal del chat */
+.sa-chat {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  height: 100%;          
+  max-height: calc(100vh - 120px); 
+  overflow: hidden;    
+}
+
+/* Cuerpo con scroll interno */
+.sa-chat__body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;      
+  background: #f7fbff;
+}
+
+/* Footer siempre dentro del cuadro */
+.sa-chat__footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  flex-shrink: 0;        
+}
+/* ===== Sugerencias ===== */
+.sa-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.sa-suggestion-btn {
+  background: #eef4ff;
+  border: 1px solid #d9e3ff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.sa-suggestion-btn:hover {
+  background: #d9e3ff;
+}
+
+.sa-suggestion-btn:active {
+  transform: scale(0.97);
+}

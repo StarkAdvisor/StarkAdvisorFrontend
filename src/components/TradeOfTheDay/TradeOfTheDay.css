@@ -1,0 +1,380 @@
+/* ================================
+   Trade of the Day — Styles
+   (texto oscuro + responsive)
+   Compatible con official-design.css
+=================================== */
+
+/* Helpers de variables con fallbacks por si no existen */
+:root {
+    /* No redefinimos tu paleta; solo proveemos fallbacks */
+    --tod-color-black: var(--color-black, #000000);
+    --tod-color-white: var(--color-white, #ffffff);
+    --tod-color-gray-100: #f8fafc;
+    --tod-color-gray-200: #e5e7eb;
+    --tod-color-gray-300: #d1d5db;
+    --tod-color-gray-500: var(--color-gray-medium, #666666);
+    --tod-color-primary: var(--color-primary, #004080);
+    --tod-color-success: var(--color-success, #0F9D58);
+    --tod-color-danger: var(--color-error, #AA0000);
+
+    --tod-radius-lg: var(--radius-lg, 10px);
+    --tod-radius-xl: var(--radius-xl, 14px);
+
+    --tod-shadow-sm: var(--shadow-sm, 0 4px 14px rgba(0,0,0,.06));
+    --tod-font: var(--font-primary, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+
+    --tod-gap: 12px;
+}
+
+/* Página del módulo */
+.tod-page {
+    padding: 16px 20px;
+    font-family: var(--tod-font);
+    color: var(--tod-color-black);
+}
+
+/* =======================
+   Tabs superiores
+======================= */
+.tod-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--tod-radius-xl);
+    background: var(--glass-bg, var(--tod-color-white));
+    border: 1px solid var(--tod-color-gray-200);
+    box-shadow: var(--tod-shadow-sm);
+    margin-bottom: 16px;
+}
+
+.tod-tabs__left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tab {
+    border: none;
+    padding: 10px 12px;
+    border-radius: var(--tod-radius-lg);
+    background: transparent;
+    color: var(--tod-color-black);
+    font-weight: 600;
+    cursor: pointer;
+}
+.tab.active {
+    background: #f0f0f0;
+    border: 1px solid var(--tod-color-gray-200);
+}
+
+.tod-tabs__right { display: flex; align-items: center; }
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #eef4ff;
+    border: 1px solid #d9e3ff;
+    color: var(--tod-color-black);
+    font-weight: 700;
+}
+.pill-dot { opacity: .6; }
+
+/* =======================
+   Grid de cards (3→2→1)
+======================= */
+.grid {
+    display: grid;
+    gap: var(--tod-gap);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 1200px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+    .grid { grid-template-columns: 1fr; }
+}
+
+/* Superficie base (cards) */
+.surface {
+    background: var(--tod-color-white);
+    border: 1px solid var(--tod-color-gray-200);
+    border-radius: var(--tod-radius-xl);
+    box-shadow: var(--tod-shadow-sm);
+}
+
+/* =======================
+   Card simple (lista)
+======================= */
+.tile {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--tod-color-black); /* forzamos texto negro en la card */
+}
+
+.tile__head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 8px;
+}
+.tile__title {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    color: var(--tod-color-black);
+}
+.symbol {
+    font-weight: 800;
+    letter-spacing: .3px;
+}
+.forward {
+    color: var(--tod-color-gray-500);
+    font-size: 14px;
+    margin-left: 2px;
+}
+.pct {
+    font-size: 14px;
+    font-weight: 700;
+    /* el color del % se define inline desde TSX segun +/− */
+}
+.tile__price {
+    font-weight: 700;
+    color: var(--tod-color-black);
+}
+
+.tile__bullets {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--tod-color-gray-500); /* bullets más legibles */
+    line-height: 1.55;
+    font-size: 14px;
+}
+.tile__bullets li { margin: 2px 0; }
+
+.tile__foot {
+    display: flex;
+    justify-content: flex-start;
+    border-top: 1px solid var(--tod-color-gray-200);
+    padding-top: 8px;
+    margin-top: 2px;
+}
+.tile__foot .date {
+    color: var(--tod-color-gray-500);
+    font-size: 12px;
+}
+
+/* =======================
+   Sección Detalle (tod-*)
+======================= */
+.tod-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    font-family: var(--tod-font);
+    color: var(--tod-color-black);
+}
+
+.tod-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--tod-radius-xl);
+    padding: 16px 20px;
+    background: var(--tod-color-white);
+    border: 1px solid var(--tod-color-gray-200);
+    box-shadow: var(--tod-shadow-sm);
+    color: var(--tod-color-black);
+}
+
+.tod-title {
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: var(--tod-color-black);
+}
+.tod-subtitle {
+    margin: 4px 0 0;
+    color: var(--tod-color-gray-500);
+    font-size: 14px;
+}
+
+.tod-header__right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tod-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f6f7fb;
+    border: 1px solid var(--tod-color-gray-200);
+    font-size: 13px;
+    color: var(--tod-color-black);
+}
+
+/* Layout 2 columnas -> 1 en mobile */
+.tod-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+}
+@media (max-width: 1024px) {
+    .tod-grid { grid-template-columns: 1fr; }
+}
+
+.tod-card {
+    padding: 16px;
+    background: var(--tod-color-white);
+    border: 1px solid var(--tod-color-gray-200);
+    border-radius: var(--tod-radius-xl);
+    box-shadow: var(--tod-shadow-sm);
+    color: var(--tod-color-black);
+}
+
+.tod-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tod-symbol {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.tod-ticker {
+    font-weight: 700;
+    letter-spacing: .6px;
+    color: var(--tod-color-black);
+}
+
+.tod-setup {
+    color: var(--tod-color-primary);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(0, 64, 128, .08);
+    border: 1px solid rgba(0, 64, 128, .25);
+}
+
+.tod-direction {
+    font-weight: 800;
+    /* el color se define inline según dirección (success / danger) */
+}
+
+.tod-thesis {
+    margin: 8px 0 12px;
+    line-height: 1.55;
+    color: var(--tod-color-black);
+}
+
+/* Métricas responsive (7 → 5 → 4 → 2 → 1) */
+.tod-metrics {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 12px;
+}
+@media (max-width: 1280px) { .tod-metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (max-width: 1024px) { .tod-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 820px)  { .tod-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px)  { .tod-metrics { grid-template-columns: 1fr; } }
+
+.tod-metric {
+    padding: 10px 12px;
+    border-radius: var(--tod-radius-lg);
+    background: var(--tod-color-gray-100);
+    border: 1px solid var(--tod-color-gray-200);
+}
+.tod-metric__label {
+    display: block;
+    color: var(--tod-color-gray-500);
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+.tod-metric__value {
+    font-weight: 700;
+    color: var(--tod-color-black);
+}
+
+/* Mini chart */
+.tod-chart {
+    margin: 12px 0 8px;
+    padding: 10px;
+    border-radius: var(--tod-radius-lg);
+    background: #f6f7fb;
+    border: 1px dashed rgba(0,0,0,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tod-color-black); /* currentColor para el trazo del sparkline */
+}
+
+/* Acciones */
+.tod-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Aside / notas */
+.tod-section-title {
+    margin: 0 0 8px;
+    font-weight: 700;
+    color: var(--tod-color-black);
+}
+.tod-list {
+    margin: 0 0 8px 16px;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--tod-color-black);
+}
+.tod-notes {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(0,0,0,.18);
+}
+.tod-notes__title {
+    margin: 0 0 4px;
+    font-weight: 700;
+    color: var(--tod-color-black);
+}
+.tod-notes__text {
+    margin: 0;
+    color: var(--tod-color-black);
+}
+/* Selector de orden (desplegable) */
+.tod-order {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+.tod-order__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+}
+.tod-order__select {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  font-weight: 600;
+}
