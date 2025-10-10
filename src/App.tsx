@@ -6,7 +6,7 @@ import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import TradeOfTheDay from './components/TradeOfTheDay/TradeOfTheDay';
 import ChatbotPanel from './components/Chatbot/ChatbotPanel';
-import NewsFeed from './components/News/NewsFeed'; // <—— Asegúrate que exista este componente
+import NewsFeed from './components/News/NewsFeed';
 
 import { User } from './types';
 import './styles/official-design.css';
@@ -160,19 +160,19 @@ export default function App() {
     <Routes>
       {/* Todo bajo "/" usa tu Layout */}
       <Route element={<Shell user={effectiveUser} />}>
-        {/* raíz -> dashboard */}
-        <Route index element={<Navigate to="/dashboard" replace />} />
+        {/* raíz -> ahora va a /trade */}
+        <Route index element={<Navigate to="/trade" replace />} />
 
         {/* Rutas del producto */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/news" element={<NewsFeed />} />      {/* <<< Noticias por URL */}
+        <Route path="/news" element={<NewsFeed />} />
         <Route path="/trade" element={<TradeOfTheDay />} />
         <Route path="/chatbot" element={<ChatbotPanel />} />
         <Route path="/market" element={<Market />} />
         <Route path="/profile" element={<ProfilePage user={effectiveUser} onUpdate={handleUpdateProfile} />} />
 
-        {/* 404 -> dashboard */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        {/* 404 -> también a /trade */}
+        <Route path="*" element={<Navigate to="/trade" replace />} />
       </Route>
     </Routes>
   );
