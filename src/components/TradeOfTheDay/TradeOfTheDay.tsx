@@ -122,7 +122,7 @@ const Card: React.FC<{ t: TradeCard; onSelect: (sym: string) => void }> = ({ t, 
   return (
     <article
       className="tile surface"
-      /* role="article"  <- redundante; se elimina para cumplir eslint jsx-a11y/no-redundant-roles */
+      /* role="article" (redundante) */
       style={{ color: 'var(--color-black)' }}
       onClick={() => onSelect(t.symbol)}
     >
@@ -183,6 +183,7 @@ const TradeDetail: React.FC<{ base: TradeCard | null }> = ({ base }) => {
     : entry * (1 - Math.abs(avg) / 0.6);
   const confidence = Math.max(55, Math.min(92, Math.round(Math.abs(avg) * 9)));
 
+  // usar estas variables (evita no-unused-vars)
   const risk = Math.abs(entry - stop);
   const reward = Math.abs(target - entry);
   const dirColor = dir === 'LONG' ? 'var(--color-success)' : 'var(--color-error)';
@@ -239,8 +240,8 @@ const TradeDetail: React.FC<{ base: TradeCard | null }> = ({ base }) => {
             <Metric label="Stop" value={<span>{stop.toFixed(2)}</span>} />
             <Metric label="Objetivo" value={<span>{target.toFixed(2)}</span>} />
             <Metric label="R:R" value={<span>{rr.toFixed(2)}x</span>} />
-            <Metric label="Riesgo" value={<span>{Math.abs(entry - stop).toFixed(2)}</span>} />
-            <Metric label="Recompensa" value={<span>{Math.abs(target - entry).toFixed(2)}</span>} />
+            <Metric label="Riesgo" value={<span>{risk.toFixed(2)}</span>} />
+            <Metric label="Recompensa" value={<span>{reward.toFixed(2)}</span>} />
             <Metric label="Confianza" value={<span>{confidence}%</span>} />
           </div>
         </article>
