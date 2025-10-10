@@ -28,6 +28,7 @@ jobs:
         working-directory: ./
 
       - name: Build app
+        # Si necesitas ignorar warnings que rompen el build, usa: CI=false npm run build
         run: npm run build
         working-directory: ./
 
@@ -38,10 +39,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_CLIFF_07F3C070F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"        # raíz del repo
-          api_location: ""         # sin API
-          output_location: "build" # carpeta generada por CRA
-          skip_app_build: true     # <- clave: no recompilar con Oryx
+          app_location: "build"   # <-- carpeta con index.html ya compilado
+          api_location: ""        # sin API
+          skip_app_build: true    # no recompilar con Oryx
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
