@@ -169,10 +169,22 @@ function Dashboard() {
           background: 'rgba(255,255,255,0.1)',
           borderRadius: '50%',
         }} />
-        <h1 style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: '700' }}>
+        <h1 style={{ 
+          margin: '0 0 8px 0', 
+          fontSize: '36px', 
+          fontWeight: '800',
+          color: '#ffffff',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+        }}>
           Panel de Control
         </h1>
-        <p style={{ margin: 0, fontSize: '18px', opacity: 0.9 }}>
+        <p style={{ 
+          margin: 0, 
+          fontSize: '20px', 
+          opacity: 1,
+          color: '#ffffff',
+          fontWeight: '500'
+        }}>
           Bienvenido a StarkAdvisor - Tu plataforma de información financiera
         </p>
       </div>
