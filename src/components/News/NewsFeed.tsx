@@ -304,39 +304,37 @@ return (
     ) : (
       <div className="nf-grid" role="list">
         {displayed.map(n => (
-          <article className="nf-card" key={n.id} role="listitem">
+          <article key={n.id} className="nf-card" role="listitem">
+            <h2 className="nf-title-card" title={n.title}>{n.title}</h2>
+            <p className="nf-description">{n.description ?? 'No description available.'}</p>
+
             <div className="nf-row">
               <div className="nf-left">
-                <div className={pillClass(n.sentiment)}>
-                  {n.sentiment === 'POSITIVE' ? 'Positiva' : 'Negativa'}
-                </div>
-                <div className="nf-meta">
-                  {n.source ?? '—'} • {n.published_at ?? '—'}
-                </div>
+                <span className={pillClass(n.sentiment)}>{n.sentiment}</span>
+                {n.source && <span className="nf-meta">{n.source}</span>}
+                {n.published_at && <time className="nf-meta">{n.published_at}</time>}
               </div>
               <div className="nf-right">
                 <a
-                  className="btn-secondary nf-open"
+                  className="btn-link"
                   href={n.url}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
-                  ABRIR
+                  Leer
                 </a>
               </div>
             </div>
 
-            <h3 className="nf-title-card" title={n.title}>{n.title}</h3>
-            {n.description && <p className="nf-description">{n.description}</p>}
-
+            {/* Barra de sentimiento */}
             <div className="nf-sentiment">
-              <div className="nf-sentiment__track" aria-hidden>
-                <div
+              <div className="nf-sentiment__track">
+                <div 
                   className={`nf-sentiment__bar ${n.sentiment === 'POSITIVE' ? 'pos' : 'neg'}`}
                   style={{ width: scoreWidth(n.sentiment_score) }}
                 />
               </div>
-              <div className="nf-sentiment__score">{scorePercent(n.sentiment_score)}</div>
+              <span className="nf-sentiment__score">{scorePercent(n.sentiment_score)}</span>
             </div>
           </article>
         ))}

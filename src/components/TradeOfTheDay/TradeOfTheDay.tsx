@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './TradeOfTheDay.css';
 
-/** Backend (usar env en prod si está definida) */
-const API_URL =
-  (process.env.REACT_APP_API_URL
-    ? `${process.env.REACT_APP_API_URL.replace(/\/+$/, '')}/api/trade-of-the-day/`
-    : 'http://localhost:8000/api/trade-of-the-day/');
+/** Backend (formato único) */
+const API_URL = `${process.env.REACT_APP_API_URL}/trade-of-the-day/`;
 
+type Market = 'FOREX' | 'CRYPTO' | 'STOCK' | 'FUTURES';
 type Direction = 'LONG' | 'SHORT';
+type TF = 'M15' | 'H1' | 'H4' | 'D1';
 
 /** Lo que devuelve tu backend */
 type ApiRow = {
@@ -122,7 +121,7 @@ const Card: React.FC<{ t: TradeCard; onSelect: (sym: string) => void }> = ({ t, 
   return (
     <article
       className="tile surface"
-      /* role="article" (redundante) */
+      role="article"
       style={{ color: 'var(--color-black)' }}
       onClick={() => onSelect(t.symbol)}
     >
@@ -183,7 +182,6 @@ const TradeDetail: React.FC<{ base: TradeCard | null }> = ({ base }) => {
     : entry * (1 - Math.abs(avg) / 0.6);
   const confidence = Math.max(55, Math.min(92, Math.round(Math.abs(avg) * 9)));
 
-  // usar estas variables (evita no-unused-vars)
   const risk = Math.abs(entry - stop);
   const reward = Math.abs(target - entry);
   const dirColor = dir === 'LONG' ? 'var(--color-success)' : 'var(--color-error)';

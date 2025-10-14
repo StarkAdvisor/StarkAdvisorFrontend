@@ -1,4 +1,33 @@
-# Getting Started with Create React App
+# StarkAdvisor Frontend
+
+## Descripción
+
+StarkAdvisor es una plataforma de información financiera de próxima generación que ofrece análisis avanzado, noticias del mercado en tiempo real y asesoría inteligente para inversiones.
+
+## 🆕 Nueva Página de Presentación
+
+Hemos creado una página de presentación profesional inspirada en TradingView que incluye:
+
+### Características Principales
+- **Header fijo** con logo y botones de autenticación
+- **Hero section** con título impactante y call-to-action
+- **Gráfico mockup** animado estilo TradingView
+- **Sección de características** con iconos y descripciones
+- **Estadísticas** de la plataforma
+- **Call-to-action final** y footer
+
+### Rutas de Navegación
+- `/` - Página de presentación (Landing Page)
+- `/login` - Formulario de inicio de sesión  
+- `/register` - Formulario de registro
+- `/app/dashboard` - Panel principal de la aplicación
+
+### Paleta de Colores
+```css
+--color-primary: #004080;        /* Azul corporativo */
+--color-secondary: #0F9D58;      /* Verde para éxito */
+--color-alert: #AA0000;          /* Rojo para alertas */
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

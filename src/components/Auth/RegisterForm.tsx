@@ -230,35 +230,46 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
   return (
     <div className="flex items-center justify-center min-h-screen" style={{ 
-      backgroundColor: 'var(--color-white)',
-      padding: '24px 0'
+      background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)',
+      padding: '24px 16px'
     }}>
-      <div className="w-full max-w-lg">
+      <div className="w-full" style={{ maxWidth: '500px' }}>
         <div style={{
           backgroundColor: 'var(--color-white)',
-          padding: '32px',
-          borderRadius: '8px',
-          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
-          border: '1px solid var(--color-gray-light)'
+          padding: '40px',
+          borderRadius: '12px',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+          border: '1px solid var(--color-gray-light)',
+          margin: '0 auto',
+          animation: 'slideUp 0.6s ease-out',
+          transform: 'translateY(0)'
         }}>
           {/* Logo y título */}
-          <div className="text-center mb-4">
+          <div className="text-center" style={{ marginBottom: '32px' }}>
             <h1 style={{
               color: 'var(--color-primary)',
-              fontSize: 'var(--font-size-h1)',
+              fontSize: '28px',
               fontWeight: 'var(--font-weight-semibold)',
-              marginBottom: '8px'
+              marginBottom: '8px',
+              letterSpacing: '0.5px'
             }}>
               STARKADVISOR
             </h1>
             <h2 style={{
               color: 'var(--color-black)',
-              fontSize: 'var(--font-size-h2)',
+              fontSize: '22px',
               fontWeight: 'var(--font-weight-semibold)',
-              marginBottom: '24px'
+              marginBottom: '8px'
             }}>
               Crear Cuenta
             </h2>
+            <p style={{
+              color: 'var(--color-gray-medium)',
+              fontSize: '14px',
+              margin: '0'
+            }}>
+              Únete a la plataforma financiera de próxima generación
+            </p>
           </div>
 
           {/* Error general */}
@@ -604,7 +615,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
               className="btn-primary w-full"
               disabled={isLoading}
               style={{
-                marginBottom: '24px'
+                marginBottom: '24px',
+                padding: '14px',
+                fontSize: '16px',
+                fontWeight: 'var(--font-weight-semibold)',
+                borderRadius: '8px',
+                transition: 'all 0.3s ease',
+                cursor: isLoading ? 'not-allowed' : 'pointer',
+                opacity: isLoading ? 0.7 : 1
               }}
             >
               {isLoading ? 'CREANDO CUENTA...' : 'CREAR CUENTA'}
@@ -625,7 +643,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
               className="btn-secondary"
               disabled={isLoading}
               style={{
-                width: '100%'
+                width: '100%',
+                padding: '14px',
+                fontSize: '16px',
+                fontWeight: 'var(--font-weight-semibold)',
+                borderRadius: '8px',
+                transition: 'all 0.3s ease',
+                cursor: isLoading ? 'not-allowed' : 'pointer',
+                opacity: isLoading ? 0.7 : 1
               }}
             >
               INICIAR SESIÓN
