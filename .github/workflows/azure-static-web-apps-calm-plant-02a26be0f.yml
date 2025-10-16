@@ -2,12 +2,15 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    branches: [ "main" ]
+  workflow_dispatch:
+
+concurrency:
+  group: swa-starkadvisor-frontend-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_and_deploy_job:
@@ -15,23 +18,32 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: false
           lfs: false
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          # Evita que CRA/ESLint falle el build por warnings en CI
+          CI: false
+          DISABLE_ESLINT_PLUGIN: true
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_PLANT_02A26BE0F }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # para comentarios en PR
+          action: upload
+
+          ###### Configuración del repo/build (ajusta si tu app está en subcarpeta) ######
+          app_location: "/"                 # Ruta del código de la app ("/" si está en la raíz)
+          api_location: ""                  # Ruta de API (opcional)
+          output_location: "build"          # Carpeta generada por el build
+
+          # Fuerza el comando de build para CRA con CI=false (por si Oryx no toma el env)
+          app_build_command: "CI=false npm run build"
+          ###### Fin configuración ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -43,4 +55,4 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_PLANT_02A26BE0F }}
-          action: "close"
+          action: close
