@@ -8,7 +8,7 @@ import {
   ApiError
 } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 const TOKEN_KEY = 'starkadvisor_token';
 
 // Configuración de axios
@@ -104,6 +104,116 @@ export class ApiService {
         `/user_admin/users/${userId}/update/`,
         updates
       );
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  // Mercado Financiero
+  static async getStockMetrics(params: {
+    page?: number;
+    page_size?: number;
+    sort_by?: string;
+    order?: string;
+    query?: string;
+  }): Promise<any> {
+    try {
+      const searchParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          searchParams.append(key, value.toString());
+        }
+      });
+
+      const response = await apiClient.get(`/api/metrics/stocks/?${searchParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getETFMetrics(params: {
+    sort_by?: string;
+    order?: string;
+    query?: string;
+  }): Promise<any> {
+    try {
+      const searchParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          searchParams.append(key, value.toString());
+        }
+      });
+
+      const response = await apiClient.get(`/api/metrics/etfs/?${searchParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getCurrencyMetrics(params: {
+    sort_by?: string;
+    order?: string;
+    query?: string;
+  }): Promise<any> {
+    try {
+      const searchParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          searchParams.append(key, value.toString());
+        }
+      });
+
+      const response = await apiClient.get(`/api/metrics/currencies/?${searchParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getStockDetail(ticker: string): Promise<any> {
+    try {
+      const response = await apiClient.get(`/api/metrics/stocks/${ticker}/`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getETFDetail(ticker: string): Promise<any> {
+    try {
+      const response = await apiClient.get(`/api/metrics/etfs/${ticker}/`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getCurrencyDetail(ticker: string): Promise<any> {
+    try {
+      const response = await apiClient.get(`/api/metrics/currencies/${ticker}/`);
+      return response.data;
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
+
+  static async getTimeSeries(params: {
+    ticker: string;
+    period?: string;
+    asset_type?: string;
+  }): Promise<any> {
+    try {
+      const searchParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, value);
+        }
+      });
+
+      const response = await apiClient.get(`/api/metrics/time-series/?${searchParams.toString()}`);
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);
